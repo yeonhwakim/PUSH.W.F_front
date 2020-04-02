@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    button {
+      border: 0;
+      background-color: transparent;
+    }
+
     input {
       padding: 10px;
       border: 1px solid #757575;
@@ -34,21 +39,44 @@
     .title {
       display: inline;
     }
+
+    .list_wrap {
+      display: none;
+    }
+
+    .list_wrap.on {
+      display: block;
+    }
+
+    .btnAddList {
+      width: 60px;
+      height: 37px; 
+      border: 1px solid #757575; 
+      color: #757575;
+    }
+
+    .btnOpenList {
+      width: 60px;
+      height: 37px; 
+      border: 1px solid #757575; 
+      color: #757575;
+    }
   </style>
 </head>
 <body>
   <h1>Semo-Work-Flow</h1>
   <div>
-    <h2 class="title">기획</h2> <button class="">열기</button>
-    <div>
-      <form onsubmit="addList">
+    <h2 class="title">기획</h2> 
+    <button class="btnOpenList" onclick="toggleList('planWrap')">열기</button>
+    <div id="planWrap" class="list_wrap">
+      <form onsubmit="addList(this)">
         <input type="text" placeholder="날짜">
         <input type="text" placeholder="버전">
         <input type="text" placeholder="작성자">
         <input type="text" placeholder="페이지">
         <input type="text" placeholder="내용">
         <input type="text" placeholder="분류">
-        <button type="submit">입력</button>
+        <button class="btnAddList" type="submit">입력</button>
       </form>
       <div>
         <table>
@@ -75,8 +103,11 @@
         </table>
       </div>
     </div>
-    <h2 class="title">디자인</h2> <button>열기</button>
-    <div>
+  </div>
+  <div>
+    <h2 class="title">디자인</h2> 
+    <button class="btnOpenList"  onclick="toggleList('designWrap')">열기</button>
+    <div id="designWrap" class="list_wrap">
       <form>
         <input type="text" placeholder="날짜">
         <input type="text" placeholder="버전">
@@ -84,18 +115,63 @@
         <input type="text" placeholder="페이지">
         <input type="text" placeholder="내용">
         <input type="text" placeholder="분류">
-        <button type="submit">입력</button>
+        <button class="btnAddList" type="submit">입력</button>
       </form>
       <div>
-        <ul class="designListBox"></ul>
+        <table>
+          <thead>
+            <tr>
+              <th>날짜</th>
+              <th>버전</th>
+              <th>작성자</th>
+              <th>페이지</th>
+              <th>내용</th>
+              <th>분류</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20200401</td>
+              <td>v2.3</td>
+              <td>누구냐</td>
+              <td>p26</td>
+              <td>ibkㅡㅡ</td>
+              <td>ui</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <h2 class="title">퍼블리싱</h2> <button>열기</button>
-    <div>
-      <div>
-        <ul class="publishListBox"></ul>
-      </div>
+  </div>
+  <div>
+    <h2 class="title">퍼블리싱</h2> 
+    <button class="btnOpenList" onclick="toggleList('publishingWrap')">열기</button>
+    <div id="publishingWrap" class="list_wrap"> 
+      <table>
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>버전</th>
+            <th>작성자</th>
+            <th>페이지</th>
+            <th>내용</th>
+            <th>분류</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>20200401</td>
+            <td>v2.3</td>
+            <td>누구냐</td>
+            <td>p26</td>
+            <td>ibkㅡㅡ</td>
+            <td>ui</td>
+          </tr>
+        </tbody>
+      </table> 
     </div>
+  </div>
+
   </div>
   <script src="./index.js"></script>
 </body>
