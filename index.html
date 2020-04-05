@@ -68,14 +68,17 @@
   <div>
     <h2 class="title">기획</h2> 
     <button class="btnOpenList" onclick="toggleList('planWrap')">열기</button>
-    <div id="planWrap" class="list_wrap">
-      <form onsubmit="addList(this)">
-        <input type="text" placeholder="날짜">
-        <input type="text" placeholder="버전">
-        <input type="text" placeholder="작성자">
-        <input type="text" placeholder="페이지">
-        <input type="text" placeholder="내용">
-        <input type="text" placeholder="분류">
+    <div id="planWrap" class="list_wrap" style="display: block">
+      <!-- <form id="planeForm" onsubmit="return addList(this)"> -->
+      <form id="planeForm">
+        <div class="dataField">
+          <input type="text" placeholder="날짜" name="date">
+          <input type="text" placeholder="버전" name="version">
+          <input type="text" placeholder="작성자" name="writer">
+          <input type="text" placeholder="페이지" name="pages">
+          <input type="text" placeholder="내용" name="text">
+          <input type="text" placeholder="분류" name="classification">
+        </div>
         <button class="btnAddList" type="submit">입력</button>
       </form>
       <div>
@@ -90,7 +93,7 @@
               <th>분류</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="planeTable">
             <tr>
               <td>20200401</td>
               <td>v2.3</td>
