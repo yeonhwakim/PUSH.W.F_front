@@ -2,35 +2,45 @@ const domList = {
   planWrap: document.querySelector('#planWrap'),
   designWrap: document.querySelector('#designWrap'),
   publishingWrap: document.querySelector('#publishingWrap'),
-  planeForm: document.querySelector('#planeForm'), 
-  planeTable: document.querySelector('#planeTable'), 
-  planeIndex: document.querySelector('#planeTable').children.length, 
+  planForm: document.querySelector('#planForm'), 
+  designForm: document.querySelector('#designForm'), 
+  planTable: document.querySelector('#planTable'), 
+  designTable: document.querySelector('#designTable'), 
+  publishingTable: document.querySelector('#publishingTable'), 
+  planIndex: document.querySelector('#planTable').children.length, 
+  designIndex: document.querySelector('#designTable').children.length, 
+  publishingIndex: document.querySelector('#publishingTable').children.length, 
+  planHidden: document.querySelector('#palneHidden'), 
+  designHidden: document.querySelector('#designHidden'), 
+  publishingHidden: document.querySelector('#publishingHidden'), 
+  domList: ['plan', 'design', 'publishing'], 
+  domNext: {
+    plan: 'design', 
+    design: 'publishing', 
+    publishing: 'plan'
+  }
 }
  
 const toggleList = (element) => {    
   domList[element].classList.toggle('on');
 }
 
-planeForm.onsubmit = (e)  =>{
+planForm.onsubmit = (e)  =>{
   e.preventDefault();
-  addList(e.target, 'planeTable');
+  addList(e.target, 'planTable');
+}
+
+designForm.onsubmit = (e)  =>{
+  e.preventDefault();
+  addList(e.target, 'designTable');
 }
 
 const addList = (ele, type) => { 
   if(!checktInput(ele)) {
     const data = createObj(ele);
-    const list = createList(data, domList[type]);
-    domList[type].prepend(list);
+    appendList(data, type) 
     resetInput(ele);
   }
-}
-
-const removeList = () => {
-  
-}
-
-const updateList = () =>{
-  
 }
 
 const createObj = (ele) =>{
@@ -43,26 +53,33 @@ const createObj = (ele) =>{
 }
 
 const createList = (data, ele) => {
-  const th = ['check', 'no', 'date', 'version', 'writer', 'pages', 'text', 'classification'];
+  const td = ['check', 'no', 'date', 'version', 'writer', 'pages', 'text', 'classification'];
   const tr = document.createElement('tr'); 
-  const check = document.createElement('input'); 
-
+  const check = document.createElement('input');   
+  const index = ele.children.length + 1; 
+  const type = domList['domList'].filter(l => {
+    return !ele.id.indexOf(l) 
+  })  
   check.className = 'checkList';
-  check.type = 'checkbox'; 
-  data['check'] = check; 
+  check.type = 'checkbox';   
+  check.onchange = (e) => {
+    putCheckedData(e, type[0])
+  }
 
-  data['no'] = ele.children.length + 1; 
+  data['check'] = check;  
+  data['no'] = index; 
    
-  th.forEach(d => {
+  td.forEach(d => { 
     const td = document.createElement('td');
 
     td.className = `list ${d}`;
-
+    
     if(typeof data[d] === 'object') {
       td.append(data[d]);
     } 
-
+    
     if(typeof data[d] === 'string' || typeof data[d] === 'number') {
+      check.dataset[d] = data[d];
       td.textContent = data[d];
     } 
 
@@ -70,6 +87,11 @@ const createList = (data, ele) => {
   })
 
   return tr                 
+}
+
+const appendList = (data, type) => {   
+  const list = createList(data, domList[type]);
+  domList[type].prepend(list); 
 }
 
 const resetInput = (ele) =>{
@@ -90,4 +112,31 @@ const checktInput = (ele) =>{
     return element.value === '' 
   });
   
+}
+
+const putCheckedData = (e, type) => {  
+  const valueDom = domList[`${type}Hidden`]; 
+  const values = valueDom.value ? valueDom.value.split(',') : []; 
+  e.target.checked ? values.push(e.target.dataset.no) :  values.splice(values.indexOf(e.target.dataset.no), 1);
+  valueDom.value = values;
+}
+
+const getCheckedData = (type) => {   
+  console.log(type)
+  const checkedList = domList[`${type}Hidden`].value.split(',');  
+  const children = domList[`${type}Table`].children 
+  checkedList.map(index => {
+    const dataset =  children[parseInt(index) -1].querySelector('input').dataset;
+    return { 
+      no: dataset.no,
+      date: dataset.date,
+      version: dataset.version,
+      writer: dataset.writer,
+      pages: dataset.pages,
+      text: dataset.text,
+      classification: dataset.classification
+    }
+  }).forEach(data => { 
+    appendList(data, `${domList['domNext'][type]}Table`)
+  }) 
 }

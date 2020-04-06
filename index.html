@@ -68,10 +68,10 @@
   <div>
     <h2 class="title">기획</h2> 
     <button class="btnOpenList" onclick="toggleList('planWrap')">열기</button>
-    <button class="btnOpenList" onclick="checkList()">확인</button>
+    <button class="btnOpenList" onclick="getCheckedData('plan')">확인</button>
     <div id="planWrap" class="list_wrap" style="display: block">
-      <!-- <form id="planeForm" onsubmit="return addList(this)"> -->
-      <form id="planeForm">
+      <!-- <form id="planForm" onsubmit="return addList(this)"> -->
+      <form id="planForm">
         <div class="dataField">
           <input type="text" placeholder="날짜" name="date">
           <input type="text" placeholder="버전" name="version">
@@ -84,6 +84,7 @@
       </form>
       <div>
         <table>
+          <input type='hidden' id="palneHidden" value="">
           <thead>
             <tr>
               <th></th>
@@ -96,19 +97,7 @@
               <th>분류</th>
             </tr>
           </thead>
-          <tbody id="planeTable">
-            <tr>
-              <td>
-                <input type="checkbox"> 
-              </td>
-              <td>1</td>
-              <td>20200401</td>
-              <td>v2.3</td>
-              <td>누구냐</td>
-              <td>p26</td>
-              <td>ibkㅡㅡ</td>
-              <td>ui</td>
-            </tr>
+          <tbody id="planTable"> 
           </tbody>
         </table>
       </div>
@@ -117,20 +106,26 @@
   <div>
     <h2 class="title">디자인</h2> 
     <button class="btnOpenList"  onclick="toggleList('designWrap')">열기</button>
-    <div id="designWrap" class="list_wrap">
-      <form>
-        <input type="text" placeholder="날짜">
-        <input type="text" placeholder="버전">
-        <input type="text" placeholder="작성자">
-        <input type="text" placeholder="페이지">
-        <input type="text" placeholder="내용">
-        <input type="text" placeholder="분류">
+    <button class="btnOpenList" onclick="getCheckedData('design')">확인</button>
+    <div id="designWrap" class="list_wrap" style="display: block">
+      <form id="designForm">
+        <div class="dataField">
+          <input type="text" placeholder="날짜" name="date">
+          <input type="text" placeholder="버전" name="version">
+          <input type="text" placeholder="작성자" name="writer">
+          <input type="text" placeholder="페이지" name="pages">
+          <input type="text" placeholder="내용" name="text">
+          <input type="text" placeholder="분류" name="classification">
+        </div>
         <button class="btnAddList" type="submit">입력</button>
       </form>
       <div>
         <table>
+          <input type='hidden' id="designHidden" value="">
           <thead>
             <tr>
+              <th></th>
+              <th>NO.</th>
               <th>날짜</th>
               <th>버전</th>
               <th>작성자</th>
@@ -139,15 +134,7 @@
               <th>분류</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>20200401</td>
-              <td>v2.3</td>
-              <td>누구냐</td>
-              <td>p26</td>
-              <td>ibkㅡㅡ</td>
-              <td>ui</td>
-            </tr>
+          <tbody id="designTable"> 
           </tbody>
         </table>
       </div>
@@ -156,10 +143,14 @@
   <div>
     <h2 class="title">퍼블리싱</h2> 
     <button class="btnOpenList" onclick="toggleList('publishingWrap')">열기</button>
-    <div id="publishingWrap" class="list_wrap"> 
+    <button class="btnOpenList" onclick="getCheckedData('publishing')">확인</button>
+    <div id="publishingWrap" class="list_wrap" style="display: block"> 
       <table>
+        <input type='hidden' id="publishingHidden" value="">
         <thead>
           <tr>
+            <th></th>
+            <th>NO.</th>
             <th>날짜</th>
             <th>버전</th>
             <th>작성자</th>
@@ -168,15 +159,7 @@
             <th>분류</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>20200401</td>
-            <td>v2.3</td>
-            <td>누구냐</td>
-            <td>p26</td>
-            <td>ibkㅡㅡ</td>
-            <td>ui</td>
-          </tr>
+        <tbody id="publishingTable"> 
         </tbody>
       </table> 
     </div>
