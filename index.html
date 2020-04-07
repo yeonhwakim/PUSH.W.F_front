@@ -69,11 +69,14 @@
     <h2 class="title">기획</h2> 
     <button class="btnOpenList" onclick="toggleList('planWrap')">열기</button>
     <button class="btnOpenList" onclick="addInput('plan')">추가</button> 
-    <button class="btnOpenList" onclick="getCheckedData('plan')">확인</button>
+    <button class="btnOpenList" onclick="getList('plan')">수정</button> 
+    <button class="btnOpenList" onclick="updateList('plan')">수정완료</button> 
+    <button class="btnOpenList" onclick="moveList('plan')">확인</button>
     <div id="planWrap" class="list_wrap" style="display: block">
       <!-- <form id="planForm" onsubmit="return addList(this)"> -->
       <form id="planForm">
         <div class="dataField">
+          <input type="hidden" name="no" value="">
           <input type="text" placeholder="날짜" name="date">
           <input type="text" placeholder="버전" name="version">
           <input type="text" placeholder="작성자" name="writer">
@@ -85,7 +88,7 @@
       </form>
       <div>
         <table>
-          <input type='hidden' id="palneHidden" value="">
+          <input type='hidden' id="planHidden" value="">
           <thead>
             <tr>
               <th></th>
@@ -108,6 +111,8 @@
     <h2 class="title">디자인</h2> 
     <button class="btnOpenList"  onclick="toggleList('designWrap')">열기</button>
     <button class="btnOpenList" onclick="addInput('design')">추가</button>  
+    <button class="btnOpenList" onclick="getList('design')">수정</button> 
+    <button class="btnOpenList" onclick="updateList('design')">수정완료</button> 
     <button class="btnOpenList" onclick="getCheckedData('design')">확인</button>
     <div id="designWrap" class="list_wrap" style="display: block">
       <form id="designForm">
