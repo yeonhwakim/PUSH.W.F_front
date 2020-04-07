@@ -20,6 +20,18 @@ const domList = {
     publishing: 'plan'
   }
 }
+
+const htmlList = {
+  input :  
+    '<div class="dataField">'+
+      '<input type="text" placeholder="날짜" name="date">'+
+      '<input type="text" placeholder="버전" name="version">'+
+      '<input type="text" placeholder="작성자" name="writer">'+
+      '<input type="text" placeholder="페이지" name="pages">'+
+      '<input type="text" placeholder="내용" name="text">'+
+      '<input type="text" placeholder="분류" name="classification">'+
+    '</div>'
+}
  
 const toggleList = (element) => {    
   domList[element].classList.toggle('on');
@@ -37,21 +49,25 @@ designForm.onsubmit = (e)  =>{
 
 const addList = (ele, type) => { 
   if(!checktInput(ele)) {
-    const data = createObj(ele);
-    appendList(data, type) 
+    const data = createObj(ele);  
+    appendList(data, type);
     resetInput(ele);
   }
 }
 
-const createObj = (ele) =>{
-  const dataObj = {}
-  const children = [...ele.querySelector('.dataField').children];
-  children.forEach(element => {
-    dataObj[element.name] = element.value;
+const createObj = (ele) =>{ 
+  const children = [...ele.querySelectorAll('.dataField')];  
+  const data = children.map(element => { 
+    const obj = {} 
+    const input = [...element.children]
+    input.forEach(ele => {
+      obj[ele.name] = ele.value;
+    })
+    return obj
   });
-  return dataObj;
+  return data;
 }
-
+ 
 const createList = (data, ele) => {
   const td = ['check', 'no', 'date', 'version', 'writer', 'pages', 'text', 'classification'];
   const tr = document.createElement('tr'); 
@@ -89,16 +105,22 @@ const createList = (data, ele) => {
   return tr                 
 }
 
-const appendList = (data, type) => {   
-  const list = createList(data, domList[type]);
-  domList[type].prepend(list); 
+const appendList = (data, type) => {  
+  data.map(d => {
+    const list = createList(d, domList[type]);
+    domList[type].prepend(list); 
+  })
 }
 
-const resetInput = (ele) =>{
-  const children = [...ele.querySelector('.dataField').children];
-  children.forEach(element => {
-    element.value = '';
+const resetInput = (ele) =>{    
+  const children = [...ele.querySelectorAll('.dataField')];    
+  const type = domList['domList'].filter(l => {
+    return !ele.id.indexOf(l) 
+  }) 
+  children.forEach(element => {  
+    element.remove()
   });
+  addInput(type[0])
   return
 }
 
@@ -121,11 +143,10 @@ const putCheckedData = (e, type) => {
   valueDom.value = values;
 }
 
-const getCheckedData = (type) => {   
-  console.log(type)
+const getCheckedData = (type) => {    
   const checkedList = domList[`${type}Hidden`].value.split(',');  
   const children = domList[`${type}Table`].children 
-  checkedList.map(index => {
+  const list = checkedList.map(index => {
     const dataset =  children[parseInt(index) -1].querySelector('input').dataset;
     return { 
       no: dataset.no,
@@ -136,7 +157,22 @@ const getCheckedData = (type) => {
       text: dataset.text,
       classification: dataset.classification
     }
-  }).forEach(data => { 
-    appendList(data, `${domList['domNext'][type]}Table`)
   }) 
+
+  appendList(list, `${domList['domNext'][type]}Table`);
+   
+}
+
+const addInput = (type) => {
+  domList[`${type}Form`].querySelector('.btnAddList').insertAdjacentHTML(
+    'beforebegin', 
+    '<div class="dataField">'+
+      '<input type="text" placeholder="날짜" name="date">'+
+      '<input type="text" placeholder="버전" name="version">'+
+      '<input type="text" placeholder="작성자" name="writer">'+
+      '<input type="text" placeholder="페이지" name="pages">'+
+      '<input type="text" placeholder="내용" name="text">'+
+      '<input type="text" placeholder="분류" name="classification">'+
+    '</div>'
+  )
 }
