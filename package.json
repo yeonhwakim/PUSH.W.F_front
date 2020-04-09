@@ -1,0 +1,31 @@
+{
+  "name": "PUSH.W.F_front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx codeceptjs run --steps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeonhwakim/PUSH.W.F_front.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yeonhwakim/PUSH.W.F_front/issues"
+  },
+  "homepage": "https://github.com/yeonhwakim/PUSH.W.F_front#readme",
+  "devDependencies": {
+    "codeceptjs": "^2.6.1",
+    "puppeteer": "^2.1.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0"
+  }
+}
