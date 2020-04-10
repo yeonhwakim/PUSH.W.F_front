@@ -1,0 +1,51 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+input:not([type="checkbox"]) {
+  width: 100px;
+  padding: 10px;
+}
+
+select {
+  width: 100px; 
+  padding: 10px;
+}
+
+button {
+  width: 100px; 
+  padding: 8px;
+}
+
+table {
+  margin: 10px 0;
+  width: 80%;
+  border-collapse: collapse;
+  border: 1px solid #757575;
+}
+
+table th {
+  border: 1px solid #757575;
+  text-align: center;
+}
+
+table td {
+  border: 1px solid #757575;
+  text-align: center;
+}
+
+table td.classification.off {
+  background-color: #757575; 
+  opacity: 0.5;
+}
+
+.dataField {
+  display: flex;
+  align-items: center;
+}

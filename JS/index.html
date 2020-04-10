@@ -3,177 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
-  <style>
-    button {
-      border: 0;
-      background-color: transparent;
-    }
-
-    input {
-      padding: 10px;
-      border: 1px solid #757575;
-    }
-
-    form {
-      margin: 10px 0;
-    }
-      
-    table {
-      margin: 10px 0;
-      width: 80%;
-      border-collapse: collapse;
-      border: 1px solid #757575;
-    }
-
-    table th{
-      border: 1px solid #757575;
-      text-align: center;
-    }
-
-    table td{
-      border: 1px solid #757575;
-      text-align: center;
-    }
-
-    .title {
-      display: inline;
-    }
-
-    .list_wrap {
-      display: none;
-    }
-
-    .list_wrap.on {
-      display: block;
-    }
-
-    .btnAddList {
-      width: 60px;
-      height: 37px; 
-      border: 1px solid #757575; 
-      color: #757575;
-    }
-
-    .btnOpenList {
-      width: 60px;
-      height: 37px; 
-      border: 1px solid #757575; 
-      color: #757575;
-    }
-  </style>
 </head>
 <body>
-  <h1>Semo-Work-Flow</h1>
-  <div>
-    <h2 class="title">기획</h2> 
-    <button class="btnOpenList" onclick="toggleList('planWrap')">열기</button>
-    <button class="btnOpenList" onclick="addInput('plan')">추가</button> 
-    <button class="btnOpenList" onclick="getList('plan')">수정</button> 
-    <button class="btnOpenList" onclick="updateList('plan')">수정완료</button> 
-    <button class="btnOpenList" onclick="deleteList('plan')">삭제</button> 
-    <button class="btnOpenList" onclick="moveList('plan')">확인</button>
-    <div id="planWrap" class="list_wrap" style="display: block">
-      <!-- <form id="planForm" onsubmit="return addList(this)"> -->
+  <h1>semo_work_flow</h1>
+  <section>
+    <h2>기획</h2>
+    <div>
       <form id="planForm">
+        <div class="dataField">
+          <input class="no" type="hidden" name="no" value="">
+          <input class="date" type="text" placeholder="날짜" name="date">
+          <input class="file" type="text" placeholder="파일" name="file">
+          <input class="version" type="text" placeholder="버전" name="version">
+          <input class="writer" type="text" placeholder="작성자" name="writer">
+          <input class="pages" type="text" placeholder="페이지" name="pages">
+          <input class="text" type="text" placeholder="내용" name="text">
+          <select class="classification" placeholder="분류" name="classification">
+            <option>디자인</option>
+            <option>퍼블리싱</option>
+            <option>개발</option>
+          </select>
+        </div>
+        <button id="planBtn" name="planSubmitBtn" type="submit">리스트 입력</button>
+      </form>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <th></th>
+          <th>no</th>
+          <th>날짜</th>
+          <th>파일</th>
+          <th>버전</th>
+          <th>작성자</th>
+          <th>페이지</th>
+          <th>내용</th>
+          <th>디자인</th>
+          <th>퍼블리싱</th>
+          <th>개발</th>
+        </thead>
+        <tbody id="planList">
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section>
+    <h2>디자인</h2>
+    <div>
+      <form>
         <div class="dataField">
           <input type="hidden" name="no" value="">
           <input type="text" placeholder="날짜" name="date">
+          <input type="text" placeholder="파일" name="version">
           <input type="text" placeholder="버전" name="version">
           <input type="text" placeholder="작성자" name="writer">
           <input type="text" placeholder="페이지" name="pages">
           <input type="text" placeholder="내용" name="text">
-          <input type="text" placeholder="분류" name="classification">
+          <select type="text" placeholder="분류" name="classification">
+            <option>디자인</option>
+            <option>퍼블리싱</option>
+            <option>개발</option>
+          </select>
         </div>
-        <button class="btnAddList" type="submit">입력</button>
+        <button>리스트 입력</button>
       </form>
-      <div>
-        <table>
-          <input type='hidden' id="planHidden" value="">
-          <thead>
-            <tr>
-              <th></th>
-              <th>NO.</th>
-              <th>날짜</th>
-              <th>버전</th>
-              <th>작성자</th>
-              <th>페이지</th>
-              <th>내용</th>
-              <th>분류</th>
-            </tr>
-          </thead>
-          <tbody id="planTable"> 
-          </tbody>
-        </table>
-      </div>
     </div>
-  </div>
-  <div>
-    <h2 class="title">디자인</h2> 
-    <button class="btnOpenList"  onclick="toggleList('designWrap')">열기</button>
-    <button class="btnOpenList" onclick="addInput('design')">추가</button>  
-    <button class="btnOpenList" onclick="getList('design')">수정</button> 
-    <button class="btnOpenList" onclick="updateList('design')">수정완료</button> 
-    <button class="btnOpenList" onclick="getCheckedData('design')">확인</button>
-    <div id="designWrap" class="list_wrap" style="display: block">
-      <form id="designForm">
-        <div class="dataField">
-          <input type="text" placeholder="날짜" name="date">
-          <input type="text" placeholder="버전" name="version">
-          <input type="text" placeholder="작성자" name="writer">
-          <input type="text" placeholder="페이지" name="pages">
-          <input type="text" placeholder="내용" name="text">
-          <input type="text" placeholder="분류" name="classification">
-        </div>
-        <button class="btnAddList" type="submit">입력</button>
-      </form>
-      <div>
-        <table>
-          <input type='hidden' id="designHidden" value="">
-          <thead>
-            <tr>
-              <th></th>
-              <th>NO.</th>
-              <th>날짜</th>
-              <th>버전</th>
-              <th>작성자</th>
-              <th>페이지</th>
-              <th>내용</th>
-              <th>분류</th>
-            </tr>
-          </thead>
-          <tbody id="designTable"> 
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div>
-    <h2 class="title">퍼블리싱</h2> 
-    <button class="btnOpenList" onclick="toggleList('publishingWrap')">열기</button>
-    <button class="btnOpenList" onclick="getCheckedData('publishing')">확인</button>
-    <div id="publishingWrap" class="list_wrap" style="display: block"> 
+    <div>
       <table>
-        <input type='hidden' id="publishingHidden" value="">
         <thead>
-          <tr>
-            <th></th>
-            <th>NO.</th>
-            <th>날짜</th>
-            <th>버전</th>
-            <th>작성자</th>
-            <th>페이지</th>
-            <th>내용</th>
-            <th>분류</th>
-          </tr>
+          <th></th>
+          <th>no</th>
+          <th>날짜</th>
+          <th>파일</th>
+          <th>버전</th>
+          <th>작성자</th>
+          <th>페이지</th>
+          <th>내용</th>
+          <th>디자인</th>
+          <th>퍼블리싱</th>
+          <th>개발</th>
         </thead>
-        <tbody id="publishingTable"> 
-        </tbody>
-      </table> 
-    </div>
-  </div>
+        <tbody id="designList">
 
-  </div>
-  <script src="./index.js"></script>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section>
+    <h2>퍼블리싱</h2>
+    <div>
+      <table>
+        <thead>
+          <th></th>
+          <th>no</th>
+          <th>날짜</th>
+          <th>파일</th>
+          <th>버전</th>
+          <th>작성자</th>
+          <th>페이지</th>
+          <th>내용</th>
+          <th>디자인</th>
+          <th>퍼블리싱</th>
+          <th>개발</th>
+        </thead>
+        <tbody id="publishingList">
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section>
+    <h2>개발</h2>
+    <div>
+      <table>
+        <thead>
+          <th></th>
+          <th>no</th>
+          <th>날짜</th>
+          <th>파일</th>
+          <th>버전</th>
+          <th>작성자</th>
+          <th>페이지</th>
+          <th>내용</th>
+          <th>디자인</th>
+          <th>퍼블리싱</th>
+          <th>개발</th>
+        </thead>
+        <tbody id="developmentList">
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <script src="index.js"></script>
 </body>
 </html>
