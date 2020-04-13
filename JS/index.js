@@ -49,9 +49,9 @@ const getDataArray = (formElement) =>{
 
 const appendList = (dataArray, type) => {     
   dataArray.map(data => {
-    const {list, next} = createList(data, domList[`${type}List`]);    
-    domList[`${type}List`].prepend(list); 
-    domList[`${next}List`].prepend(list); 
+    const {list, next} = createList(data, domList[`${type}List`]);   
+      domList[`${type}List`].prepend(list); 
+      domList[`${next}List`].prepend(list.cloneNode(true));  
   })
 }
 
@@ -60,7 +60,7 @@ const createList = (data, listElement) => {
   const index = listElement.children.length + 1; 
   const type = getType(listElement)   
   
-  tr.innerHTML=
+  tr.innerHTML = 
     `<td class="list check">`+
       `<input onchange="putCheckedData(this, '${type}')" class="checkList" type="checkbox" data-no="${index}" data-date="${data.date}" data-version="${data.version}" data-writer="${data.writer}" data-pages="${data.pages}" data-text="${data.text}" data-classification="${data.classification}">`+
     `</td>`+
@@ -74,7 +74,7 @@ const createList = (data, listElement) => {
     `<td class="list classification ${data.classification !== '디자인' ? 'off' :''}"></td>`+
     `<td class="list classification ${data.classification === '개발' ? 'off' :''}""></td>`+
     `<td class="list classification"></td>`
-
+ 
   return {
     list: tr , 
     next: domList.domName[data.classification]

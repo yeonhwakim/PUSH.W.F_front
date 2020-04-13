@@ -1,27 +1,35 @@
 Feature('Planner Scenario');
 
-Scenario('test something', (I) => {
+Scenario('planner add list', (I) => {
   I.amOnPage('http://localhost');
-  I.fillField('#plneForm .date', '2020-04-09');
-  I.fillField('#plneForm .file', 'ibk세모장부');
-  I.fillField('#plneForm .version', 'v1.1');
-  I.fillField('#plneForm .writer', '토니');
-  I.fillField('#plneForm .pages', '250p');
-  I.fillField('#plneForm .text', '페이지 추가');
-  I.selectOption('#plneForm .classification', '디자인');
+  I.fillField('#planForm .date', '2020-04-09');
+  I.fillField('#planForm .file', 'ibk세모장부');
+  I.fillField('#planForm .version', 'v1.1');
+  I.fillField('#planForm .writer', '토니');
+  I.fillField('#planForm .pages', '250p');
+  I.fillField('#planForm .text', '페이지 추가');
+  I.selectOption('#planForm .classification', '디자인');
   I.click('#planBtn');
-  I.seeElement('#planList tr'); 
-  // locate('#table td').at(1).withText('1');
-  // locate('#table td').at(2).withText('2020-04-09');
-  // locate('#table td').at(3).withText('ibk세모장부');
-  // locate('#table td').at(4).withText('v1.1');
-  // locate('#table td').at(5).withText('토니');
-  // locate('#table td').at(6).withText('250p');
-  // locate('#table td').at(7).withText('페이지 추가');
-  // locate('#table td').at(8).withText('');
-  // locate('#table td').at(9).withText('');
-  // locate('#table td').at(10).withText('');
-
+  I.see('1', '#planList tr:nth-child(1) td:nth-child(2)') ; 
+  I.see('2020-04-09', '#planList tr:nth-child(1) td:nth-child(3)') ; 
+  I.see('ibk세모장부', '#planList tr:nth-child(1) td:nth-child(4)') ; 
+  I.see('v1.1', '#planList tr:nth-child(1) td:nth-child(5)') ; 
+  I.see('토니', '#planList tr:nth-child(1) td:nth-child(6)') ; 
+  I.see('250p', '#planList tr:nth-child(1) td:nth-child(7)') ; 
+  I.see('페이지 추가', '#planList tr:nth-child(1) td:nth-child(8)') ; 
+  I.see('', '#planList tr:nth-child(1) td:nth-child(9)') ; 
+  I.see('', '#planList tr:nth-child(1) td:nth-child(10)') ; 
+  I.see('', '#planList tr:nth-child(1) td:nth-child(11)') ; 
+  I.see('1', '#planList tr:nth-child(1) td:nth-child(2)') ; 
+  I.see('2020-04-09', '#designList tr:nth-child(1) td:nth-child(3)') ; 
+  I.see('ibk세모장부', '#designList tr:nth-child(1) td:nth-child(4)') ; 
+  I.see('v1.1', '#designList tr:nth-child(1) td:nth-child(5)') ; 
+  I.see('토니', '#designList tr:nth-child(1) td:nth-child(6)') ; 
+  I.see('250p', '#designList tr:nth-child(1) td:nth-child(7)') ; 
+  I.see('페이지 추가', '#designList tr:nth-child(1) td:nth-child(8)') ; 
+  I.see('', '#designList tr:nth-child(1) td:nth-child(9)') ; 
+  I.see('', '#designList tr:nth-child(1) td:nth-child(10)') ; 
+  I.see('', '#designList tr:nth-child(1) td:nth-child(11)') ;  
 });
 
 // 1] 기획자
